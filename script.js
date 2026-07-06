@@ -14,7 +14,6 @@ async function addTask() {
 
     if (!taskTitle.isConfirmed) { return; }
 
-
     const task = {
         title: taskTitle.value,
     }
@@ -40,9 +39,13 @@ async function addTask() {
     newEditBtn.classList.add('btnEdit');
     newEditBtn.textContent = 'edit'
 
+    newEditBtn.addEventListener('click', editTask)
+
     const newDeleteBtn = document.createElement('button');
     newDeleteBtn.classList.add('btnDelete');
     newDeleteBtn.textContent = 'delete'
+
+    newDeleteBtn.addEventListener('click', deleteTask);
 
     newBtnDiv.append(newEditBtn);
     newBtnDiv.append(newDeleteBtn);
@@ -50,15 +53,69 @@ async function addTask() {
     newTask.append(newBtnDiv);
 
     taskList.append(newTask);
-    console.log(taskList)
 }
 
-btnAdd.addEventListener('click', addTask)
+async function editTask(e) {
+    const parent = e.target.parentElement;
+    const parentSibling = parent.previousElementSibling;
 
-btnClear.onclick = () => {
+    const newTaskTitle = await swal.fire({
+        inputLabel: 'Enter new task title',
+        input: 'text',
+        showCancelButton: true
+    });
+
+    if (!newTaskTitle.isConfirmed) { return };
+
+    const newTask = {
+        newTitle: newTaskTitle.value
+    };
+
+    swal.fire({
+        title: 'Successfuly changed task!',
+        icon: 'success',
+    });
+
+    parentSibling.textContent = newTask.newTitle;
+
+}
+
+async function deleteTask(e) {
+    // first, ask the user for confirmation
+    const confirmation = await swal.fire({
+        title: 'Are you sure you want to delete this task?',
+        icon: 'warning',
+        showCancelButton: true
+    })
+
+    if (!confirmation.isConfirmed) { return; }
+
+    // get the most parent container and get that parent container to delete the current task.
+
+    const parent = e.target.parentElement;
+    const olderParent = parent.parentElement;
+    
+    olderParent.remove();
+}
+
+btnAdd.addEventListener('click', addTask);
+
+btnClear.addEventListener('click', async () => {
+    const confirmation = await swal.fire({
+        title: 'Are you sure you want to delete all tasks?',
+        icon: 'warning',
+        showCancelButton: true
+    })
+
+    if (!confirmation.isConfirmed) { return; }
+
     const tasks = document.querySelectorAll(".task");
     console.log(taskList)
     tasks.forEach(task => {
         task.remove();
     })
-};
+})
+
+btnEdit.addEventListener('click', editTask);
+
+btnDelete.addEventListener('click', deleteTask);
