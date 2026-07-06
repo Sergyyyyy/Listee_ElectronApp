@@ -1,7 +1,7 @@
-const btnClear = document.getElementById("btnClear");
-const btnAdd = document.getElementById("btnAdd");
-const btnEdit = document.getElementById("btnEdit");
-const btnDelete = document.getElementById("btnDelete");
+const btnClear = document.querySelector(".btnClear");
+const btnAdd = document.querySelector(".btnAdd");
+const btnEdit = document.querySelector(".btnEdit");
+const btnDelete = document.querySelector(".btnDelete");
 
 const taskList = document.querySelector(".bottom-content");
 
