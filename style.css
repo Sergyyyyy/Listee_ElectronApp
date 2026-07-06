@@ -1,7 +1,117 @@
-
 /* basic style reset */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+nav {
+    background-color: #2A3B7E;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 56px;
+    width: 100%;
+}
+
+nav h2 {
+    padding: 20px;
+    font-size: 30px;
+    color: white;
+}
+
+
+.top-content {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-content h3 {
+    font-size: 16px;
+}
+
+.btns-top-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+}
+
+.btns-top-container button {
+    padding: 5px 18px;
+
+    background-color: #2A3B7E;
+    color: #FFF;
+
+    border: none;
+    border-radius: 7px;
+
+    transition: 0.3s ease-in-out;
+}
+
+.btns-top-container button:hover {
+    background-color: #3e5bd1;
+}
+
+.btns-top-container button:active {
+    background-color: #5471e7;
+}
+
+.task {
+    padding: 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #D9D9D9;
+}
+
+.btns-bottom-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+}
+
+#btnEdit {
+    padding: 5px 18px;
+
+    background-color: #FFF;
+    color: #31A935;
+
+    border: #31A935 2px solid;
+    border-radius: 7px;
+
+    transition: 0.3s ease-in-out;
+}
+
+#btnEdit:hover{
+    background-color: #31A935;
+    color: #FFF;
+}
+
+#btnDelete {
+    padding: 5px 18px;
+
+    background-color: #FFF;
+    color: #E62D2D;
+
+    border: #E62D2D 2px solid;
+    border-radius: 7px;
+
+    transition: 0.3s ease-in-out;
+}
+
+#btnDelete:hover{
+    background-color: #E62D2D;
+    color: #FFF;
+}
+
+.btns-bottom-container button:active {
+    background-color: #5471e7;
 }
