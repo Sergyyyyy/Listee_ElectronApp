@@ -78,7 +78,7 @@ nav h2 {
     gap: 10px;
 }
 
-#btnEdit {
+.btnEdit {
     padding: 5px 18px;
 
     background-color: #FFF;
@@ -90,12 +90,12 @@ nav h2 {
     transition: 0.3s ease-in-out;
 }
 
-#btnEdit:hover{
+.btnEdit:hover{
     background-color: #31A935;
     color: #FFF;
 }
 
-#btnDelete {
+.btnDelete {
     padding: 5px 18px;
 
     background-color: #FFF;
@@ -107,7 +107,7 @@ nav h2 {
     transition: 0.3s ease-in-out;
 }
 
-#btnDelete:hover{
+.btnDelete:hover{
     background-color: #E62D2D;
     color: #FFF;
 }
