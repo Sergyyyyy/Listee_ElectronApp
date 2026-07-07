@@ -1,22 +1,87 @@
-function log(anything) {
-    console.log(anything);
-}
-
+// Main references required
 const btnClear = document.querySelector(".btnClear");
 const btnAdd = document.querySelector(".btnAdd");
 const btnEdit = document.querySelector(".btnEdit");
 const btnDelete = document.querySelector(".btnDelete");
 
 const taskList = document.querySelector(".bottom-content");
+const btnToggle = document.querySelector('.btnLightDark');
+
+// References required for the theme
+let bottom = document.body;
+let taskListTitle = document.querySelector('.top-content h3');
+let taskMainTitleDiv = document.querySelector('nav');
+let topContent = document.querySelector('.top-content');
+let taskDivs = document.querySelectorAll('.task');
+let topBtns = document.querySelectorAll('.btns-top-container button');
+let botttomBtns = document.querySelectorAll('.btns-bottom-container button');
+
+let darkState = true;
 
 let tasks = [
     { title: 'Sample Task 1' }
 ];
 
+function toggleTheme() {
+    if (darkState == true) { darkState = false; }
+    else { darkState = true; }
+    addToStorage();
+    applyTheme();
+}
+
+function applyTheme() {
+    let botttomBtns = document.querySelectorAll('.btns-bottom-container button');
+    let taskDivs = document.querySelectorAll('.task');
+
+    if (darkState) {
+        bottom.style.backgroundColor = '#3d3d3d';
+        taskMainTitleDiv.style.backgroundColor = '#202020';
+        topContent.style.backgroundColor = '#3d3d3d';
+
+        taskDivs.forEach((task) => {
+            task.style.backgroundColor = '#202020';
+            task.style.color = '#FFF';
+            taskListTitle.style.color = '#FFF';
+        })
+
+        topBtns.forEach(btn => {
+            btn.style.backgroundColor = '#202020';
+        })
+
+        botttomBtns.forEach(btn => {
+            btn.style.backgroundColor = '#202020';
+        })
+    }
+    else {
+        bottom.style.backgroundColor = '#FFF';
+        taskMainTitleDiv.style.backgroundColor = '#2A3B7E';
+        topContent.style.backgroundColor = '#FFF';
+
+        taskDivs.forEach((task) => {
+            task.style.backgroundColor = '#D9D9D9';
+            task.style.color = '#000';
+            taskListTitle.style.color = '#000';
+        })
+
+        topBtns.forEach(btn => {
+            btn.style.backgroundColor = '#2A3B7E';
+        })
+
+        botttomBtns.forEach(btn => {
+            btn.style.backgroundColor = '#FFF';
+        })
+    }
+}
+
+btnToggle.onclick = toggleTheme;
+
+
 function addToStorage() {
     const taskStringify = JSON.stringify(tasks);
+    const themeState = JSON.stringify(darkState);
 
     localStorage.setItem('tasks', taskStringify);
+    localStorage.setItem('theme', themeState);
 }
 
 function renderElements() {
@@ -62,11 +127,16 @@ function renderElements() {
 
 function loadTasks() {
 
-    if (localStorage.getItem('tasks') === null){
+    if (localStorage.getItem('tasks') === null) {
+        addToStorage();
+    }
+
+    if (localStorage.getItem('theme') === null) {
         addToStorage();
     }
 
     tasks = JSON.parse(localStorage.getItem('tasks'));
+    darkState = JSON.parse(localStorage.getItem('theme'));
 }
 
 async function addTask() {
@@ -165,7 +235,7 @@ btnClear.addEventListener('click', async () => {
 
     if (!confirmation.isConfirmed) { return; }
 
-    tasks.splice(i, tasks.length);
+    tasks.length = 0;
 
     addToStorage();
     renderElements();
@@ -173,3 +243,4 @@ btnClear.addEventListener('click', async () => {
 
 loadTasks();
 renderElements();
+applyTheme();
