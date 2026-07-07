@@ -16,10 +16,11 @@ let taskDivs = document.querySelectorAll('.task');
 let topBtns = document.querySelectorAll('.btns-top-container button');
 let botttomBtns = document.querySelectorAll('.btns-bottom-container button');
 
-let darkState = true;
+let darkState = false;
 
 let tasks = [
-    { title: 'Sample Task 1' }
+    { title: 'Hi! This is the Listee To-Do List app!' },
+    { title: 'Created to practice JavaScript.'}
 ];
 
 function toggleTheme() {
@@ -244,3 +245,4 @@ btnClear.addEventListener('click', async () => {
 loadTasks();
 renderElements();
 applyTheme();
+
