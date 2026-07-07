@@ -10,8 +10,7 @@ const btnDelete = document.querySelector(".btnDelete");
 const taskList = document.querySelector(".bottom-content");
 
 let tasks = [
-    { title: 'Sample Task 1' },
-    { title: 'Sample Task 2' }
+    { title: 'Sample Task 1' }
 ];
 
 function addToStorage() {
@@ -63,9 +62,11 @@ function renderElements() {
 
 function loadTasks() {
 
-    const taskParse = JSON.parse(localStorage.getItem('tasks'));
+    if (localStorage.getItem('tasks') === null){
+        addToStorage();
+    }
 
-    tasks = taskParse;
+    tasks = JSON.parse(localStorage.getItem('tasks'));
 }
 
 async function addTask() {
